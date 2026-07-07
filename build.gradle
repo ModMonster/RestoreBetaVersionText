@@ -1,7 +1,6 @@
 plugins {
 	id 'maven-publish'
 	id 'fabric-loom' version '1.17-SNAPSHOT'
-	id 'ploceus' version '1.17-SNAPSHOT'
 }
 
 base {
@@ -9,10 +8,6 @@ base {
 }
 version = "${project.version}+mc${project.minecraft_version}"
 group = project.maven_group
-
-ploceus {
-	setIntermediaryGeneration(2)
-}
 
 repositories {
 	// Add repositories to retrieve artifacts from in here.
@@ -24,9 +19,8 @@ repositories {
 
 dependencies {
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
+	mappings loom.officialMojangMappings()
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
-
-	mappings ploceus.featherMappings(project.feather_build)
 }
 
 processResources {
