@@ -1,6 +1,7 @@
 package ca.modmonster.beta_text_restorer.mixin;
 
 import net.minecraft.SharedConstants;
+import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
@@ -19,8 +20,8 @@ public class GuiInGameMixin {
 	private Minecraft minecraft;
 
 	@Inject(method = "render", at = @At("TAIL"))
-	public void render(GuiGraphics guiGraphics, float f, CallbackInfo ci) {
-		if (!minecraft.options.renderDebug) {
+	public void render(GuiGraphics guiGraphics, DeltaTracker deltaTracker, CallbackInfo ci) {
+		if (!minecraft.getDebugOverlay().showDebugScreen()) {
 			guiGraphics.drawString(minecraft.font, "Minecraft " + SharedConstants.getCurrentVersion().getName(), 2, 2, 16777215);
 		}
 	}
