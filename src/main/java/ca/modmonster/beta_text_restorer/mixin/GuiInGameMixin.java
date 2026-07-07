@@ -1,5 +1,7 @@
 package ca.modmonster.beta_text_restorer.mixin;
 
+import com.mojang.blaze3d.vertex.PoseStack;
+
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
@@ -31,9 +33,9 @@ public class GuiInGameMixin {
 	}
 
 	@Inject(method = "render", at = @At("TAIL"))
-	public void render(float tickDelta, CallbackInfo ci) {
+	public void render(PoseStack poseStack, float f, CallbackInfo ci) {
 		if (!minecraft.options.renderDebug) {
-			minecraft.font.drawShadow("Minecraft " + version, 2, 2, 16777215);
+			minecraft.font.drawShadow(poseStack, "Minecraft " + version, 2, 2, 16777215);
 		}
 	}
 }
