@@ -5,6 +5,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.GuiGraphics;
 
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -33,9 +34,9 @@ public class GuiInGameMixin {
 	}
 
 	@Inject(method = "render", at = @At("TAIL"))
-	public void render(PoseStack poseStack, float f, CallbackInfo ci) {
-		if (!minecraft.options.renderDebug) {
-			minecraft.font.drawShadow(poseStack, "Minecraft " + version, 2, 2, 16777215);
+	public void render(GuiGraphics guiGraphics, float f, CallbackInfo ci) {
+		if (!minecraft.getDebugOverlay().showDebugScreen()) {
+			guiGraphics.drawString(minecraft.font, "Minecraft " + version, 2, 2, 16777215);
 		}
 	}
 }
