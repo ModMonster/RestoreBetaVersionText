@@ -22,7 +22,7 @@ public class GuiInGameMixin {
 	@Inject(method = "render", at = @At("TAIL"))
 	public void render(GuiGraphics guiGraphics, DeltaTracker deltaTracker, CallbackInfo ci) {
 		if (!minecraft.getDebugOverlay().showDebugScreen()) {
-			guiGraphics.drawString(minecraft.font, "Minecraft " + SharedConstants.getCurrentVersion().getName(), 2, 2, 16777215);
+			guiGraphics.drawString(minecraft.font, "Minecraft " + SharedConstants.getCurrentVersion().name(), 2, 2, 0xFFFFFFFF);
 		}
 	}
 }
