@@ -5,6 +5,7 @@ import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.render.GuiLayer;
 
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -22,7 +23,9 @@ public class GuiInGameMixin {
 	@Inject(method = "render", at = @At("TAIL"))
 	public void render(GuiGraphics guiGraphics, DeltaTracker deltaTracker, CallbackInfo ci) {
 		if (!minecraft.getDebugOverlay().showDebugScreen()) {
+			guiGraphics.pushGuiLayer(GuiLayer.HUD);
 			guiGraphics.drawString(minecraft.font, "Minecraft " + SharedConstants.getCurrentVersion().name(), 2, 2, 0xFFFFFFFF);
+			guiGraphics.popGuiLayer();
 		}
 	}
 }
