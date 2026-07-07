@@ -1,8 +1,6 @@
 package ca.modmonster.beta_text_restorer.mixin;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-
-import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.SharedConstants;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
@@ -10,7 +8,6 @@ import net.minecraft.client.gui.GuiGraphics;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -21,22 +18,10 @@ public class GuiInGameMixin {
 	@Shadow
 	private Minecraft minecraft;
 
-	@Unique
-	private final static String version;
-
-	static {
-		String raw = FabricLoader.getInstance().getRawGameVersion();
-		if (raw.startsWith("b")) {
-			version = "Beta " + raw.substring(1);
-		} else {
-			version = raw;
-		}
-	}
-
 	@Inject(method = "render", at = @At("TAIL"))
 	public void render(GuiGraphics guiGraphics, float f, CallbackInfo ci) {
-		if (!minecraft.getDebugOverlay().showDebugScreen()) {
-			guiGraphics.drawString(minecraft.font, "Minecraft " + version, 2, 2, 16777215);
+		if (!minecraft.options.renderDebug) {
+			guiGraphics.drawString(minecraft.font, "Minecraft " + SharedConstants.getCurrentVersion().getName(), 2, 2, 16777215);
 		}
 	}
 }
