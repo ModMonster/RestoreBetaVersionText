@@ -4,7 +4,7 @@ import net.minecraft.SharedConstants;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
-import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.gui.GuiGraphics;
 
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -19,10 +19,10 @@ public class GuiInGameMixin {
 	@Shadow
 	private Minecraft minecraft;
 
-	@Inject(method = "extractRenderState", at = @At("TAIL"))
-	public void render(GuiGraphicsExtractor graphics, DeltaTracker deltaTracker, CallbackInfo ci) {
+	@Inject(method = "render", at = @At("TAIL"))
+	public void render(GuiGraphics graphics, DeltaTracker deltaTracker, CallbackInfo ci) {
 		if (!minecraft.getDebugOverlay().showDebugScreen()) {
-			graphics.text(minecraft.font, "Minecraft " + SharedConstants.getCurrentVersion().name(), 2, 2, 0xFFFFFFFF);
+			graphics.drawString(minecraft.font, "Minecraft " + SharedConstants.getCurrentVersion().name(), 2, 2, 0xFFFFFFFF);
 		}
 	}
 }
