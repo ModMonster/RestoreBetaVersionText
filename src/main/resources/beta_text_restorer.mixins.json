@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "ca.modmonster.beta_text_restorer.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "client": [
+    "GuiInGameMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+	}
+}

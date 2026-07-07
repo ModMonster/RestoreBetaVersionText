@@ -1,0 +1,24 @@
+{
+	"schemaVersion": 1,
+	"id": "beta_text_restorer",
+	"version": "${version}",
+	"name": "Restore Beta Version Text",
+	"description": "Bring the text that shows the current Minecraft version back to the top left corner of your screen for versions that don't have it!",
+	"authors": [
+		"ModMonster"
+	],
+	"contact": {
+		"homepage": "https://youtube.com/modmonster",
+		"sources": "https://github.com/modmonster/RestoreBetaVersionText"
+	},
+	"license": "MIT",
+	"icon": "assets/beta_text_restorer/icon.png",
+	"environment": "client",
+	"mixins": [
+		"beta_text_restorer.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.17.3",
+		"minecraft": ">=1.0.0-beta.6.5 <=1.2.3"
+	}
+}
