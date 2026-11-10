@@ -19,8 +19,8 @@ public class GuiInGameMixin {
 
 	@Inject(method = "extractRenderState", at = @At("TAIL"))
 	public void render(GuiGraphicsExtractor graphics, CallbackInfo ci) {
-		if (!minecraft.getDebugOverlay().showDebugScreen()) {
-			graphics.text(minecraft.font, "Minecraft " + SharedConstants.getCurrentVersion().name(), 2, 2, 0xFFFFFFFF);
-		}
+		if (minecraft.getDebugOverlay().showDebugScreen()) return; // Debug shown on screen
+		if (minecraft.gui.hud.isHidden()) return; // GUI hidden
+		graphics.text(minecraft.font, "Minecraft " + SharedConstants.getCurrentVersion().name(), 2, 2, 0xFFFFFFFF);
 	}
 }
